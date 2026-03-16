@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ufc-black: #000000;
+  --color-ufc-near-black: #111111;
+  --color-ufc-charcoal: #1a1a1a;
+  --color-ufc-card: #1e1e1e;
+  --color-ufc-card-border: #2a2a2a;
+  --color-ufc-red: #e40521;
+  --color-ufc-gold: #c4a95a;
+  --color-ufc-white: #ffffff;
+  --color-ufc-light-gray: #d1d5db;
+  --color-ufc-muted-gray: #9ca3af;
+}
+
+body {
+  background-color: var(--color-ufc-near-black);
+  color: var(--color-ufc-light-gray);
+}
+
+/* Tab scroll fade for mobile */
+.tab-scroll-fade {
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .tab-scroll-fade {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
