@@ -1,8 +1,8 @@
 import Card from "@/components/ui/Card";
 
 const contacts = [
-  { name: "Ashton", initials: "A", role: "Vi Team" },
-  { name: "Katie Sutherland", initials: "KS", role: "Vi Team" },
+  { name: "Ashton", initials: "A", role: "Vi Team", phone: "(724) 787-6216" },
+  { name: "Katie Sutherland", initials: "KS", role: "Vi Team", phone: "(952) 913-6288" },
 ];
 
 export default function Support() {
@@ -21,6 +21,12 @@ export default function Support() {
             </div>
             <p className="text-ufc-white font-bold">{contact.name}</p>
             <p className="text-ufc-muted-gray text-sm">{contact.role}</p>
+            <a
+              href={`tel:${contact.phone.replace(/[^0-9]/g, "")}`}
+              className="text-ufc-red text-sm hover:underline mt-1"
+            >
+              {contact.phone}
+            </a>
           </Card>
         ))}
 
