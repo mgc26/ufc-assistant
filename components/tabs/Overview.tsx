@@ -59,7 +59,9 @@ export default function Overview() {
         <ul className="space-y-2">
           <li>
             <a
-              href="#"
+              href="https://www.youtube.com/watch?v=KciffSRKg6Q"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-ufc-red hover:underline"
             >
               Call Demo
@@ -67,7 +69,9 @@ export default function Overview() {
           </li>
           <li>
             <a
-              href="#"
+              href="https://docs.google.com/presentation/d/1nTBdBzRNjn5kHLRfkPuZTdgIlhq8RwfpVtK4rvZqnv4/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-ufc-red hover:underline"
             >
               Overview Pages
@@ -75,7 +79,9 @@ export default function Overview() {
           </li>
           <li>
             <a
-              href="#"
+              href="https://console.platform.vi.co/dashboards/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-ufc-red hover:underline"
             >
               Vi Dashboard
