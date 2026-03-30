@@ -2,24 +2,24 @@ import AccordionItem from "@/components/ui/AccordionItem";
 
 const faqs = [
   {
-    question: "Can members tell George is AI?",
+    question: "Can members tell Jade is AI?",
     answer:
-      "Yes — George discloses he's an AI assistant from UFC Gym at the start of every call. Full transparency, every time.",
+      "Yes — Jade discloses she's an AI assistant from UFC Gym at the start of every call. Full transparency, every time.",
   },
   {
     question: "What if a member asks to cancel?",
     answer:
-      "George never processes cancellations. He listens, empathizes, and escalates the member to your team with full context so you can take it from there.",
+      "Jade never processes cancellations. She listens, empathizes, and escalates the member to your team with full context so you can take it from there.",
   },
   {
-    question: "Can I change George's scripts?",
+    question: "Can I change Jade's scripts?",
     answer:
       "Not directly, but your feedback shapes every update. Flag anything — tone, topics, or location-specific details — to engage@viengage.co and changes happen the same day.",
   },
   {
-    question: "Will George replace my staff?",
+    question: "Will Jade replace my staff?",
     answer:
-      "No. George handles routine retention outreach so your team can focus on high-value moments: tours, sales, and service interactions that need a human touch.",
+      "No. Jade handles routine retention outreach so your team can focus on high-value moments: tours, sales, and service interactions that need a human touch.",
   },
 ];
 

@@ -14,7 +14,7 @@ export default function Overview() {
       {/* Intro Paragraph */}
       <p className="text-ufc-light-gray text-center max-w-3xl mx-auto mb-10 leading-relaxed">
         Vi Engage combines predictive AI with behavioral insights to enable
-        George, your AI assistant, to complete phone calls. Providing value and
+        Jade, your AI assistant, to complete phone calls. Providing value and
         enabling you to support members who need you most.
       </p>
 
@@ -25,7 +25,7 @@ export default function Overview() {
             Proactive Outreach
           </h3>
           <p className="text-ufc-light-gray">
-            George automatically calls members identified by Vi&apos;s
+            Jade automatically calls members identified by Vi&apos;s
             prediction model as needing support or engagement.
           </p>
         </Card>
@@ -45,7 +45,7 @@ export default function Overview() {
             Smart Handoff
           </h3>
           <p className="text-ufc-light-gray">
-            When a member needs human help, George escalates the conversation
+            When a member needs human help, Jade escalates the conversation
             with a summary so staff can step in quickly.
           </p>
         </Card>

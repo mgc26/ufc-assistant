@@ -10,7 +10,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "UFC GYM x Vi — Staff Resource Guide",
   description:
-    "Operational reference guide for UFC Gym staff using Vi Engage — George, your AI retention assistant.",
+    "Operational reference guide for UFC Gym staff using Vi Engage — Jade, your AI retention assistant.",
 };
 
 export default function RootLayout({

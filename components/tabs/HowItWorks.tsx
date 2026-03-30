@@ -4,21 +4,21 @@ import NumberBadge from "@/components/ui/NumberBadge";
 const items = [
   {
     number: 1,
-    question: "Who does George call?",
+    question: "Who does Jade call?",
     answer:
       "Active members showing early churn signals — about 300/week. Not prospects, not fully disengaged, and not anyone who already re-engaged after a Monday email or text.",
   },
   {
     number: 2,
-    question: "What does George talk about?",
+    question: "What does Jade talk about?",
     answer:
-      "Three topics, always tailored to your location: amenities, current programs and offerings, and recovery services. He will never mention anything not available at your club.",
+      "Three topics, always tailored to your location: amenities, current programs and offerings, and recovery services. She will never mention anything not available at your club.",
   },
   {
     number: 3,
-    question: "Will George leave voicemails?",
+    question: "Will Jade leave voicemails?",
     answer:
-      "Yes — about 1 in 3 calls results in a voicemail. George leaves a professional, on-topic message on your behalf, saving your team significant outbound call time each week.",
+      "Yes — about 1 in 3 calls results in a voicemail. Jade leaves a professional, on-topic message on your behalf, saving your team significant outbound call time each week.",
   },
   {
     number: 4,

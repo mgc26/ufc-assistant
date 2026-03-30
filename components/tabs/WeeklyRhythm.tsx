@@ -20,7 +20,7 @@ const warmTransferSteps = [
   'Member is put on hold, with music — "Let\'s get you connected to a team member."',
   'GM answers — "You are receiving a warm transfer call, press 1 to initiate"',
   'Call summary begins — "Press 1 to join the conference"',
-  "You're connected — pick up where George left off",
+  "You're connected — pick up where Jade left off",
 ];
 
 export default function WeeklyRhythm() {

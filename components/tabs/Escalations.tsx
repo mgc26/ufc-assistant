@@ -5,19 +5,19 @@ const metrics = [
   {
     icon: "\u{1F4DE}",
     title: "Today's Calls",
-    description: "How many calls George has made today",
+    description: "How many calls Jade has made today",
   },
   {
     icon: "\u23F1",
     title: "Ops Efficiency",
     description:
-      "Hours of call time George handled so your staff didn't have to",
+      "Hours of call time Jade handled so your staff didn't have to",
   },
 ];
 
 const steps = [
   "Log into the Vi dashboard",
-  'Check "Today\'s Calls" \u2014 see how many calls George has made',
+  'Check "Today\'s Calls" \u2014 see how many calls Jade has made',
   'Click "Take Action" on any escalation that needs attention',
   'Click "Resolve in GymSales" \u2014 opens the member\'s GymSales profile directly',
   "Click the call dropdown, select the member's phone number, and call",
