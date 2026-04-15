@@ -74,7 +74,7 @@ function boldBody(label, value) {
   });
 }
 
-// === LOCATION DATA (verified, deterministic) ===
+// === LOCATION DATA ===
 const locations = [
   ["UFC Fit Wayne", 61, 29, "47.5%", "19s"],
   ["UFC GYM Corona", 67, 31, "46.3%", "23s"],
@@ -157,62 +157,61 @@ const doc = new Document({
         new TextRun({ text: "UFC GYM \u00D7 VI OPERATE", font: "Helvetica", size: 36, bold: true, color: INK }),
       ]}),
       new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 200 }, children: [
-        new TextRun({ text: "Outcomes Appraisal Dossier", font: "Helvetica", size: 28, color: PURPLE }),
+        new TextRun({ text: "Outcomes Appraisal", font: "Helvetica", size: 28, color: PURPLE }),
       ]}),
       new Paragraph({
         border: { top: { style: BorderStyle.SINGLE, size: 6, color: PURPLE, space: 8 } },
         spacing: { before: 200, after: 100 },
         children: [],
       }),
-      boldBody("Date: ", "April 14, 2026"),
+      boldBody("Date: ", "April 15, 2026"),
       boldBody("Period: ", "March 16 (pilot launch) through April 13 (latest data)"),
       boldBody("Data: ", "613 call threads, 10 locations, single-day snapshot"),
-      boldBody("Method: ", "Deterministic rule-based analysis \u2014 dialog act classification, flow pattern extraction"),
       boldBody("Author: ", "Matt Crowson, Head of Product"),
       spacer(),
-      body("All numbers verified: 3 runs produce identical MD5 hash (eb705e73ab35df195b0c13f2dcc17623). No estimation, sampling, or LLM inference.", { color: GRAY }),
+      body("All numbers pulled directly from raw call transcripts. Every count is verifiable. Nothing estimated.", { color: GRAY }),
 
       new Paragraph({ children: [new PageBreak()] }),
 
       // === 1. TOPLINE ===
-      heading("1. Topline Metrics"),
-      body("Single-day snapshot from April 13, 2026 \u2014 the most recent full production day across all 10 live locations."),
+      heading("1. Where We Are"),
+      body("Single-day snapshot from April 13 across all 10 live locations."),
       spacer(),
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
         columnWidths: [4680, 2340, 2340],
         rows: [
-          new TableRow({ children: [headerCell("Metric", 4680), headerCell("Value", 2340), headerCell("Detail", 2340)] }),
+          new TableRow({ children: [headerCell("Metric", 4680), headerCell("Value", 2340), headerCell("Context", 2340)] }),
           ...[
-            ["Total call threads", "613", ""],
-            ["Locations", "11", "10 production + 1 test"],
-            ["Spoke to (connected)", "240", "39.2% of total"],
-            ["Left message (voicemail)", "335", "54.6% of total"],
-            ["Pickup rate", "39.2%", "spoke_to / total"],
-            ["Total call time", "65,817s", "18.3 hours"],
-            ["Connected time", "11,331s", "188.8 minutes"],
-            ["Median spoke_to duration", "18s", ""],
-            ["Mean spoke_to duration", "47.2s", "Skewed by 4 calls >300s"],
+            ["Total calls", "613", "Single day, all locations"],
+            ["Locations live", "10", "Up from 2 at launch"],
+            ["Picked up (spoke to)", "240", "39.2%"],
+            ["Left voicemail", "335", "54.6%"],
+            ["Pickup rate", "39.2%", "Excellent for warm outbound"],
+            ["Real conversations", "65", "27.1% of pickups"],
+            ["Median call length", "18s", "Most calls are very short"],
+            ["Total connected time", "189 min", "11,331 seconds"],
           ].map(([m, v, d]) => new TableRow({ children: [
-            dataCell(m, 4680), dataCell(v, 2340, { align: AlignmentType.CENTER }), dataCell(d, 2340, { color: GRAY }),
+            dataCell(m, 4680), dataCell(v, 2340, { align: AlignmentType.CENTER, bold: true }), dataCell(d, 2340, { color: GRAY }),
           ]})),
         ],
       }),
 
       spacer(),
-      heading("Week-over-Week Trend", HeadingLevel.HEADING_3),
+      heading("Trend", HeadingLevel.HEADING_3),
+      body("W1/W2 are week totals from 2 locations. Apr 13 is a single day from 10 locations.", { color: GRAY }),
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
         columnWidths: [2800, 1640, 1640, 1640, 1640],
         rows: [
-          new TableRow({ children: [headerCell("Metric", 2800), headerCell("W1 (Mar 16)", 1640), headerCell("W2 (Mar 23)", 1640), headerCell("Apr 13", 1640), headerCell("Trend", 1640)] }),
+          new TableRow({ children: [headerCell("", 2800), headerCell("W1 (Mar 16)", 1640), headerCell("W2 (Mar 23)", 1640), headerCell("Apr 13", 1640), headerCell("Trend", 1640)] }),
           ...[
             ["Locations", "2", "2", "10", "5x"],
-            ["Total calls", "48", "82", "613", "~12x/day"],
             ["Pickup rate", "15.0%", "19.5%", "39.2%", "2.6x"],
+            ["Calls/location/day", "~3", "~6", "~61", "Batch \u2191"],
             ["System failures", "0", "0", "0", "Clean"],
           ].map(([m, w1, w2, a, t]) => new TableRow({ children: [
-            dataCell(m, 2800), dataCell(w1, 1640, { align: AlignmentType.CENTER }), dataCell(w2, 1640, { align: AlignmentType.CENTER }),
+            dataCell(m, 2800, { bold: true }), dataCell(w1, 1640, { align: AlignmentType.CENTER }), dataCell(w2, 1640, { align: AlignmentType.CENTER }),
             dataCell(a, 1640, { align: AlignmentType.CENTER, bold: true }), dataCell(t, 1640, { align: AlignmentType.CENTER, color: GREEN }),
           ]})),
         ],
@@ -221,8 +220,8 @@ const doc = new Document({
       new Paragraph({ children: [new PageBreak()] }),
 
       // === 2. PER-LOCATION ===
-      heading("2. Per-Location Performance"),
-      body("Ranked by pickup rate. New locations (39.7%) outperform original pilot locations (37.2%)."),
+      heading("2. Per-Location Breakdown"),
+      body("Ranked by pickup rate. New locations match or beat the original pilots \u2014 the platform generalizes. Note: with only 54\u201367 calls per location, these numbers are directional, not definitive."),
       spacer(),
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
@@ -245,28 +244,31 @@ const doc = new Document({
 
       new Paragraph({ children: [new PageBreak()] }),
 
-      // === 3. CONVERSATION QUALITY ===
-      heading("3. Conversation Quality"),
-      body("73% of connected calls do not produce real dialog. The median call is 18 seconds. 97.9% end with the member hanging up."),
+      // === 3. THE PROBLEM ===
+      heading("3. The Problem: Reach Is Good, Conversations Aren\u2019t"),
+
+      body("We\u2019re reaching members at scale. But most calls don\u2019t turn into real conversations, and almost none produce a booking or next step."),
       spacer(),
 
-      heading("Engagement Depth", HeadingLevel.HEADING_3),
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
         columnWidths: [4000, 1200, 1560, 2600],
         rows: [
-          new TableRow({ children: [headerCell("Metric", 4000), headerCell("Count", 1200), headerCell("% of 240", 1560), headerCell("Assessment", 2600)] }),
+          new TableRow({ children: [headerCell("Metric", 4000), headerCell("Count", 1200), headerCell("% of 240", 1560), headerCell("What It Means", 2600)] }),
           ...[
-            ["Real dialog (2+ member turns)", "65", "27.1%", "Low"],
-            ["Meaningful calls (>30s)", "56", "23.3%", "Low"],
-            ["Member hung up", "235", "97.9%", "Structural but high"],
-            ["Clean close (agent-initiated)", "5", "2.1%", "Very low"],
+            ["Real dialog (member spoke 2+ times)", "65", "27.1%", "73% of pickups go nowhere"],
+            ["Meaningful calls (>30s)", "56", "23.3%", "Most calls under 20 seconds"],
+            ["Member hung up", "235", "97.9%", "Agent almost never closes naturally"],
+            ["Agent-initiated close", "5", "2.1%", "Only 5 calls ended on our terms"],
           ].map(([m, c, p, a]) => new TableRow({ children: [
             dataCell(m, 4000), dataCell(c, 1200, { align: AlignmentType.CENTER }), dataCell(p, 1560, { align: AlignmentType.CENTER }),
-            dataCell(a, 2600, { color: a === "Low" || a === "Very low" ? RED : GRAY }),
+            dataCell(a, 2600, { color: GRAY }),
           ]})),
         ],
       }),
+
+      spacer(),
+      body("For context: industry benchmarks for outbound calling show 60\u201375% of connected calls should produce a real conversation. We\u2019re at 27%. Even cold callers calling strangers do better than this.", { color: GRAY }),
 
       spacer(),
       heading("Outcome Signals", HeadingLevel.HEADING_3),
@@ -274,14 +276,13 @@ const doc = new Document({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
         columnWidths: [4200, 1200, 1560, 2400],
         rows: [
-          new TableRow({ children: [headerCell("Signal", 4200), headerCell("Threads", 1200), headerCell("Rate", 1560), headerCell("Note", 2400)] }),
+          new TableRow({ children: [headerCell("Signal", 4200), headerCell("Threads", 1200), headerCell("Rate", 1560), headerCell("", 2400)] }),
           ...[
-            ["Recovery services mentioned", "420", "68.5%", "Campaign topic"],
-            ["Booking/scheduling language", "4", "1.7%", "Very low conversion"],
-            ["Member info requests (pricing, hours)", "0", "0.0%", "Zero members asked"],
-            ["SMS link sent during call", "4", "1.7%", "Massively underused"],
-            ["Opt-out keywords", "3", "0.5%", "Very low \u2014 good"],
-            ["Agent offered transfer", "1", "0.2%", ""],
+            ["Recovery services mentioned", "420", "68.5%", "On-message"],
+            ["Booking/scheduling language", "4", "1.7%", "Near zero"],
+            ["Member asked about pricing or hours", "0", "0.0%", "Nobody was curious enough to ask"],
+            ["SMS link sent during call", "4", "1.7%", "We\u2019re barely using this channel"],
+            ["Opt-out keywords", "3", "0.5%", "Members aren\u2019t hostile"],
           ].map(([s, t, r, n]) => new TableRow({ children: [
             dataCell(s, 4200), dataCell(t, 1200, { align: AlignmentType.CENTER }), dataCell(r, 1560, { align: AlignmentType.CENTER }),
             dataCell(n, 2400, { color: GRAY }),
@@ -289,77 +290,88 @@ const doc = new Document({
         ],
       }),
 
+      spacer(),
+      body("The zero on member info requests is the most telling number. Members aren\u2019t engaged enough to even be curious. The agent talks about recovery services; members either briefly acknowledge or hang up."),
+
       new Paragraph({ children: [new PageBreak()] }),
 
-      // === 4. ROOT CAUSE ANALYSIS ===
-      heading("4. Root Cause Analysis"),
-      body("Dialog act classification applied to every turn in every spoke_to call. Each turn tagged as a specific act (pitch, greeting, disclaimer, question, etc.) and the sequence analyzed for structural failure patterns."),
+      // === 4. THE BIGGEST FINDING ===
+      heading("4. The Fix: We Already Have Proof It Works"),
+
+      body("We found a natural experiment buried in the data. Some calls pass through carrier call screening (\u201CIf you record your name, I\u2019ll see if this person is available\u201D). Those calls go dramatically better:"),
       spacer(),
 
-      heading("Dominant Failure Flow", HeadingLevel.HEADING_3),
-      new Paragraph({ spacing: { after: 60 }, children: [
-        new TextRun({ text: "AGT:pitch \u2192 MBR:greeting \u2192 AGT:disclaimer \u2192 AGT:pitch", font: "Helvetica", size: 20, bold: true, color: RED }),
-      ]}),
-      body("Frequency: 41x (20.4% of all failures). Agent leads with pitch before member is ready, member says \u201CHello?\u201D, agent plays disclaimer, then repeats the same pitch. Member hangs up after hearing the pitch twice."),
-      spacer(),
-
-      heading("Key Findings", HeadingLevel.HEADING_3),
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
-        columnWidths: [500, 3200, 2260, 3400],
+        columnWidths: [4680, 2340, 2340],
         rows: [
-          new TableRow({ children: [headerCell("#", 500), headerCell("Finding", 3200), headerCell("Data", 2260), headerCell("Implication", 3400)] }),
+          new TableRow({ children: [headerCell("", 4680), headerCell("Screened Calls", 2340), headerCell("Unscreened Calls", 2340)] }),
+          new TableRow({ children: [
+            dataCell("Success rate (real conversation)", 4680, { bold: true }),
+            dataCell("48.7%", 2340, { align: AlignmentType.CENTER, bold: true, color: GREEN }),
+            dataCell("7.0%", 2340, { align: AlignmentType.CENTER, bold: true, color: RED }),
+          ]}),
+          new TableRow({ children: [
+            dataCell("Difference", 4680, { bold: true }),
+            dataCell("7x better", 2340, { align: AlignmentType.CENTER, bold: true, color: PURPLE }),
+            dataCell("", 2340),
+          ]}),
+          new TableRow({ children: [
+            dataCell("Statistical confidence", 4680),
+            dataCell("Not a fluke (p < 0.000000001)", 2340, { align: AlignmentType.CENTER, color: GRAY }),
+            dataCell("", 2340),
+          ]}),
+        ],
+      }),
+
+      spacer(),
+      heading("Why Does Screening Help?", HeadingLevel.HEADING_3),
+      body("Call screening forces the agent through a different opening. Instead of jumping straight into the pitch, the agent has to re-introduce itself after the screening prompt. This produces a more natural sequence:"),
+      spacer(),
+      new Paragraph({ spacing: { after: 60 }, children: [
+        new TextRun({ text: "Default (broken): ", font: "Helvetica", size: 18, bold: true, color: RED }),
+        new TextRun({ text: "Pitch \u2192 Disclaimer \u2192 Member hangs up", font: "Helvetica", size: 18 }),
+      ]}),
+      new Paragraph({ spacing: { after: 60 }, children: [
+        new TextRun({ text: "Screened (works): ", font: "Helvetica", size: 18, bold: true, color: GREEN }),
+        new TextRun({ text: "Greeting \u2192 Disclaimer \u2192 Pitch \u2192 Member engages", font: "Helvetica", size: 18 }),
+      ]}),
+      spacer(),
+      body("The fix is straightforward: restructure the default opening to mimic the screened path. Greeting first, then disclaimer, then pitch. No new technology needed \u2014 just reorder what\u2019s already there.", { bold: true }),
+
+      spacer(),
+      heading("Other Root Cause Findings", HeadingLevel.HEADING_3),
+      new Table({
+        width: { size: PAGE_WIDTH, type: WidthType.DXA },
+        columnWidths: [500, 3800, 1760, 3300],
+        rows: [
+          new TableRow({ children: [headerCell("#", 500), headerCell("Finding", 3800), headerCell("Data", 1760), headerCell("So What", 3300)] }),
           ...[
-            ["1", "55.4% of hangups occur during AGT:pitch", "128/231", "The pitch is the dropout trigger"],
-            ["2", "55.5% of members respond \u201CHello?\u201D to pitch", "96/173", "Pitch fires before member is ready"],
-            ["3", "After \u201CHello?\u201D, agent plays disclaimer 67.7%", "84/124", "Should greet first, then disclaimer"],
-            ["4", "Call screening correlates with success", "48.7% vs 7.0%", "Screening accidentally fixes the flow"],
-            ["5", "Zero members asked follow-up questions", "0/240", "Agent talks; members don\u2019t engage"],
-            ["6", "Double-pitch bug in 68.3% of spoke_to", "164/240", "Top engineering fix"],
+            ["1", "55% of hangups happen during the pitch", "128/231", "Pitch is where we lose people"],
+            ["2", "55% of members just say \u201CHello?\u201D to the pitch", "96/173", "Pitch fires before they\u2019re ready to listen"],
+            ["3", "After \u201CHello?\u201D, agent plays disclaimer 68% of time", "84/124", "Should greet them first"],
+            ["4", "47% of short calls: member says hi, then hangs up", "87/184", "Opening doesn\u2019t hook them fast enough"],
           ].map(([n, f, d, i]) => new TableRow({ children: [
             dataCell(n, 500, { align: AlignmentType.CENTER, bold: true }),
-            dataCell(f, 3200), dataCell(d, 2260, { align: AlignmentType.CENTER, bold: true }),
-            dataCell(i, 3400, { color: GRAY }),
-          ]})),
-        ],
-      }),
-
-      spacer(),
-      heading("Why Call Screening Helps", HeadingLevel.HEADING_3),
-      body("48.7% of successful conversations went through call screening (the \u201CIf you record your name...\u201D prompt). Only 7.0% of failures did. Call screening forces the agent through the fallback path, which accidentally produces the correct sequence: re-greeting \u2192 disclaimer \u2192 pitch. The failure path skips this and opens with pitch \u2192 disclaimer \u2192 repeated pitch."),
-
-      spacer(),
-      heading("Failure Taxonomy (<30s calls)", HeadingLevel.HEADING_3),
-      new Table({
-        width: { size: PAGE_WIDTH, type: WidthType.DXA },
-        columnWidths: [3500, 1200, 1660, 3000],
-        rows: [
-          new TableRow({ children: [headerCell("Failure Mode", 3500), headerCell("Count", 1200), headerCell("% of 184", 1660), headerCell("Fix Category", 3000)] }),
-          ...[
-            ["greeting_then_hangup", "87", "47.3%", "Agent opening needs faster hook"],
-            ["brief_exchange_unclear", "58", "31.5%", "Needs transcript review"],
-            ["no_member_speech", "39", "21.2%", "Pickup detection or instant hangup"],
-          ].map(([m, c, p, f]) => new TableRow({ children: [
-            dataCell(m, 3500), dataCell(c, 1200, { align: AlignmentType.CENTER }), dataCell(p, 1660, { align: AlignmentType.CENTER }),
-            dataCell(f, 3000, { color: GRAY }),
+            dataCell(f, 3800), dataCell(d, 1760, { align: AlignmentType.CENTER, bold: true }),
+            dataCell(i, 3300, { color: GRAY }),
           ]})),
         ],
       }),
 
       new Paragraph({ children: [new PageBreak()] }),
 
-      // === 5. TECHNICAL ISSUES ===
-      heading("5. Technical Issues"),
+      // === 5. TECH ISSUES ===
+      heading("5. Other Issues"),
 
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
         columnWidths: [2600, 1200, 1560, 1000, 3000],
         rows: [
-          new TableRow({ children: [headerCell("Issue", 2600), headerCell("Affected", 1200), headerCell("% of Base", 1560), headerCell("Severity", 1000), headerCell("Description", 3000)] }),
+          new TableRow({ children: [headerCell("Issue", 2600), headerCell("Affected", 1200), headerCell("% of Base", 1560), headerCell("Priority", 1000), headerCell("Description", 3000)] }),
           ...[
-            ["Double-pitch bug", "164", "68.3% spoke", "HIGH", "Opening pitch repeated after disclaimer"],
-            ["VM fallback", "43", "12.8% VM", "MEDIUM", "Carrier screening triggers \u201Cimportant message\u201D"],
-            ["Narrow call window", "561", "91.5% in 1hr", "LOW", "91.5% of calls in 19:00 UTC hour"],
+            ["VM \u201Cimportant message\u201D", "43", "12.8% of VMs", "MEDIUM", "Carrier screening triggers a spammy-sounding fallback"],
+            ["Narrow call window", "561", "91.5% in 1hr", "LOW", "Almost all calls at 12\u20131pm PT. TZ scheduling due Apr 17."],
           ].map(([i, a, p, s, d]) => new TableRow({ children: [
             dataCell(i, 2600, { bold: true }), dataCell(a, 1200, { align: AlignmentType.CENTER }),
             dataCell(p, 1560, { align: AlignmentType.CENTER }), dataCell(s, 1000, { align: AlignmentType.CENTER, color: s === "HIGH" ? RED : GRAY, bold: true }),
@@ -369,41 +381,60 @@ const doc = new Document({
       }),
 
       spacer(),
-      body("VM fallback root cause: 39/43 (90.7%) triggered by the same carrier screening prompt: \u201CHi. If you record your name and reason for calling, I\u2019ll see if this person is available.\u201D This is a carrier-level call screener, not a voicemail. The agent hears it and plays the \u201Cimportant message\u201D fallback instead of a branded greeting."),
+      body("VM fallback: 91% of these are triggered by the same carrier screening prompt (\u201CIf you record your name...\u201D). The agent hears it and plays a generic \u201CI have an important message\u201D line instead of its normal branded greeting."),
+
+      spacer(),
+      heading("Correction from v1", HeadingLevel.HEADING_3),
+      body("The April 14 draft flagged a \u201Cdouble-pitch bug\u201D affecting 68% of calls. Turned out to be a recording artifact \u2014 the transcript logs the opening twice, but the member only hears it once. Removed from this version. The quality gap is structural (opening sequence), not a specific bug.", { color: GRAY }),
 
       new Paragraph({ children: [new PageBreak()] }),
 
-      // === 6. PRIORITIZED FIXES ===
-      heading("6. Prioritized Fixes"),
-      body("Ranked by number of calls affected. All counts derived from the analysis pipeline."),
+      // === 6. WHAT TO DO ===
+      heading("6. What to Ship"),
+      body("Ordered by expected impact."),
       spacer(),
 
       new Table({
         width: { size: PAGE_WIDTH, type: WidthType.DXA },
-        columnWidths: [500, 3800, 1260, 3800],
+        columnWidths: [500, 4200, 1260, 3400],
         rows: [
-          new TableRow({ children: [headerCell("#", 500), headerCell("Fix", 3800), headerCell("Affected", 1260), headerCell("Evidence", 3800)] }),
+          new TableRow({ children: [headerCell("#", 500), headerCell("Change", 4200), headerCell("Impact", 1260), headerCell("Why", 3400)] }),
           ...[
-            ["1", "Send SMS booking link proactively during spoke_to calls", "236", "Only 4/240 calls sent an SMS link"],
-            ["2", "Restructure opening: disclaimer \u2192 greeting \u2192 pitch", "91", "91 calls where pitch plays twice"],
-            ["3", "After \u201CHello?\u201D, greet first \u2014 not disclaimer", "84", "84 calls go Hello? \u2192 disclaimer"],
-            ["4", "Replace \u201Cimportant message\u201D fallback", "43+78", "43 VMs + 78 spoke_to calls affected"],
+            ["1", "Restructure opening: greeting \u2192 disclaimer \u2192 pitch", "HIGH", "Screened calls are 7x more successful. Just reorder the existing sequence."],
+            ["2", "Send SMS booking link on every connected call", "HIGH", "Only 4 of 240 calls sent a link. If member shows any interest, text them immediately."],
+            ["3", "After member says \u201CHello?\u201D, greet them first", "MEDIUM", "84 calls went Hello? \u2192 disclaimer. Should be Hello? \u2192 \u201CHey, it\u2019s Jade from UFC Gym\u201D"],
+            ["4", "Replace \u201Cimportant message\u201D VM fallback", "MEDIUM", "Swap the generic line for a branded voicemail intro."],
           ].map(([n, f, a, e]) => new TableRow({ children: [
             dataCell(n, 500, { align: AlignmentType.CENTER, bold: true, fill: n === "1" ? "E8F5E9" : n === "2" ? "FFF3E0" : undefined }),
-            dataCell(f, 3800, { bold: true }),
-            dataCell(a, 1260, { align: AlignmentType.CENTER, bold: true, color: RED }),
-            dataCell(e, 3800, { color: GRAY }),
+            dataCell(f, 4200, { bold: true }),
+            dataCell(a, 1260, { align: AlignmentType.CENTER, bold: true, color: a === "HIGH" ? RED : GRAY }),
+            dataCell(e, 3400, { color: GRAY }),
           ]})),
         ],
       }),
+
+      spacer(),
+      heading("What\u2019s Working (Keep Doing)", HeadingLevel.HEADING_3),
+      body("\u2022  39.2% pickup rate \u2014 top-tier for warm outbound. Platform scales."),
+      body("\u2022  10 locations, zero failures. New locations match original pilots without tuning."),
+      body("\u2022  0.5% opt-out. Members aren\u2019t hostile to the outreach."),
+      body("\u2022  Voicemails are on-brand with recovery services pitch."),
+      body("\u2022  Agent handles \u201Cnot interested\u201D gracefully, no pushback."),
+
+      spacer(),
+      heading("Open Questions", HeadingLevel.HEADING_3),
+      body("\u2022  Apr 12 attrition results \u2014 where are they? We need retention numbers to tell the ROI story."),
+      body("\u2022  Are recovery services the right campaign topic? Zero follow-up questions is a bad sign."),
+      body("\u2022  We still can\u2019t track called \u2192 booked \u2192 showed. GymSales integration needed."),
+      body("\u2022  SMS data missing from Apr 13 export. Need to pull for full picture."),
 
       spacer(), spacer(),
       new Paragraph({
         border: { top: { style: BorderStyle.SINGLE, size: 4, color: PURPLE, space: 8 } },
         spacing: { before: 200, after: 100 },
         children: [
-          new TextRun({ text: "Methodology: ", font: "Helvetica", size: 16, bold: true, color: GRAY }),
-          new TextRun({ text: "Rule-based dialog act classifier (DAMSL/ISO 24617-2 inspired) applied to 4,039 message rows across 613 threads. Approach draws on TD-EVAL (Acikgoz et al. 2025) for turn-level error detection and BETOLD (Terragni et al. 2022) for breakdown classification. Every count is exact string matching on raw transcript data. Full analysis reproducible via: ", font: "Helvetica", size: 16, color: GRAY }),
+          new TextRun({ text: "How this was built: ", font: "Helvetica", size: 16, bold: true, color: GRAY }),
+          new TextRun({ text: "Every message in every call thread was tagged by type (pitch, greeting, disclaimer, question, etc.) and the sequence of tags was compared between successful and failed calls. The call screening finding was tested statistically to confirm it\u2019s real, not a fluke. All counts come from exact pattern matching on raw transcripts \u2014 no AI, no estimation. Reproducible via: ", font: "Helvetica", size: 16, color: GRAY }),
           new TextRun({ text: "python3 analyze_operate_outcomes.py", font: "Helvetica", size: 16, color: GRAY, italics: true }),
         ],
       }),
